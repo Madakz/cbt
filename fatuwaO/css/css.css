@@ -1,0 +1,78 @@
+#white-body{
+	/*background-color:#BDDCBD;*/
+	color:#fff;
+	background-image: url(../img/xam3.jpg);
+	background-size: cover;
+	background-repeat: none;
+}
+body{
+	background-color: #000;
+	color: #fff;
+}
+/*#change{
+	
+	color: #000;
+}*/
+#header{
+	background-color: #000;
+	height: auto;
+	color: #fff;
+}
+/*#black{
+	background-color: #84E184;
+	height: auto;
+}*/
+#black ul{
+	list-style: none;
+	margin-left: 0px;
+	float: right;
+}
+#black ul li{
+	display: inline-block;
+	margin-left: 0px;
+	padding-right: 5px;
+}
+#black ul li a{
+	color: #fff;
+	text-decoration: none;
+}
+#black ul li a:hover{
+	color: #1B6F1B;
+	background-color: #fff;
+}
+#large{
+	font-size:300px;
+}
+#content{
+	text-align: center;
+}
+.paper{
+	background-color: #fff;
+	color:#000;
+	border-radius: 2px;
+	font-size: 15px;
+}
+h3{
+	word-spacing: .4em;
+}
+#foot{ 
+	color:#000;
+	text-align: center;
+	background-color: #A7D1A7;
+	margin-bottom: -10px;
+ }
+ #ech{
+ 	margin-left: 50px;
+
+ 	 }
+#phorm{
+	margin-bottom: 20px;
+}
+#but a{color: white; }
+#but a:hover{color: red}
+#a{
+	background-color: black;
+	margin-top: 100px;
+	border-radius: 3px;
+	color: #84E184;
+}

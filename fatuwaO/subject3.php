@@ -1,0 +1,88 @@
+<?php
+	session_start();
+	// $sn=1;
+	include'./includes/db.php';
+	
+
+	$student=$_SESSION['biodata_id'];
+	$subject=$_SESSION['sub_id'];
+if (isset($_POST['submit'])) {
+	$answer=array();
+	$que=array();
+	$subj=$_POST['sub_id'];
+	// $stu=$_POST['student'];
+	//$que=$_POST['que_id'];
+	// $sub=$_POST['sub_id'];
+	//print_r($_POST);
+	$num=mysql_query("SELECT * FROM questions WHERE subject_id='$subj'") or die(mysql_error());
+	$num=mysql_num_rows($num);
+	for ($sn=1; $sn <=$num ; $sn++) { 		//
+		
+		$sk=$_POST;
+
+		if (empty($sk['ans'][$sn])) {
+			$sk['ans'][$sn]=0;
+		}
+		$answer[$sn]=$sk['ans'][$sn];		//passes the selected answer of key ans, index $sn to $answer array of index $sn
+		//echo $sk['ans'][$sn];
+		$stu=$sk['student'];
+		// echo $que[$sn]=$sk['que_id'][$sn];
+		$sub=$sk['sub_id'];
+		$que[$sn]=$sk['que_id'][$sn];		//passes the selected question of key que_id, index $sn to $que array of index $sn
+		//echo $sk['ans'][$sn];
+
+		$check=mysql_query("SELECT grade, biodata_id, subject_id FROM grades WHERE biodata_id='$stu' AND subject_id='$sub'")or die(mysql_error());
+		if (mysql_num_rows($check) > 0) {
+			?>
+			<script>
+				alert('This Test has been taken by you');
+				window.location.href='subject_list.php';
+			</script>
+			<?php
+			die("This Test has been taken by you");
+		}else{
+			$sql=mysql_query("INSERT INTO answers VALUES('', '$answer[$sn]', '$stu', '$sub', '$que[$sn]')") or die(mysql_error());
+		}
+			//echo $answer[$sn];
+	}
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title> cbt exam page</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/css.css">
+	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row" id="header">
+			<div class="col-md-3"><h2><b>Test Me</b></h2></div>
+			<div class="col-md-9"  id="black" style="margin-left:0px; padding-top:20px;">
+				<ul>
+					<li><a href="index.php">Home</a></li>
+					<li><a href="logout.php">logout</a></li>
+				</ul>
+			</div>
+		</div>
+		<hr/>
+		<div class="row" id="black"></div>
+		<br><br><br><br>
+		<div class="row" >
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<center><h1 class="project-item one animated fadeInRight">Congratulations! You just completed a Test</h1></center>
+				<br>
+				<a href="subject4.php"><center class="mycontact-social animated fadeInUp"><button class="btn btn-primary" id="but"> View Score!</center></a></button><br><br>
+				<a href="subject_list.php"><center class="mycontact-social animated fadeInUp"><button class="btn btn-success" id="but"> Take Next Test</center></a></button><br><br>
+				<a href="subject4.php?view=90"><center class="mycontact-social animated fadeInUp"><button class="btn btn-warning" id="but"> View Total Score</center></a></button><br><br>
+				 <br>
+				 <br>
+			</div>
+			<div class="col-md-2"></div>
+		</div><br>
+	</div>
+</body>
+</html>
